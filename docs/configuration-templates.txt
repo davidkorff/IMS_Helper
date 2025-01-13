@@ -1,0 +1,250 @@
+IMS Integration Configuration Templates
+=====================================
+
+1. appsettings.json Templates
+----------------------------
+
+Development Environment:
+{
+  "IMS": {
+    "MaxPoolSize": 10,
+    "ConnectionTimeoutMinutes": 5,
+    "RetryCount": 3,
+    "CircuitBreakerThreshold": 3,
+    "CircuitBreakerDurationSeconds": 30,
+    "HealthCheckInterval": "00:01:00",
+    "Cache": {
+      "DefaultExpirationMinutes": 5,
+      "SlidingExpirationMinutes": 2
+    },
+    "Logging": {
+      "DetailedErrors": true,
+      "MinimumLevel": "Debug"
+    }
+  }
+}
+
+Production Environment:
+{
+  "IMS": {
+    "MaxPoolSize": 100,
+    "ConnectionTimeoutMinutes": 30,
+    "RetryCount": 3,
+    "CircuitBreakerThreshold": 5,
+    "CircuitBreakerDurationSeconds": 60,
+    "HealthCheckInterval": "00:05:00",
+    "Cache": {
+      "DefaultExpirationMinutes": 15,
+      "SlidingExpirationMinutes": 5
+    },
+    "Logging": {
+      "DetailedErrors": false,
+      "MinimumLevel": "Information"
+    }
+  }
+}
+
+2. Environment Variables
+----------------------
+
+Development:
+IMS_API_URL=https://api-dev.ims.example.com
+IMS_MAX_POOL_SIZE=10
+IMS_CONNECTION_TIMEOUT=5
+IMS_RETRY_COUNT=3
+IMS_CIRCUIT_BREAKER_THRESHOLD=3
+IMS_CIRCUIT_BREAKER_DURATION=30
+IMS_HEALTH_CHECK_INTERVAL=60
+IMS_CACHE_EXPIRATION=5
+IMS_LOG_LEVEL=Debug
+
+Production:
+IMS_API_URL=https://api.ims.example.com
+IMS_MAX_POOL_SIZE=100
+IMS_CONNECTION_TIMEOUT=30
+IMS_RETRY_COUNT=3
+IMS_CIRCUIT_BREAKER_THRESHOLD=5
+IMS_CIRCUIT_BREAKER_DURATION=60
+IMS_HEALTH_CHECK_INTERVAL=300
+IMS_CACHE_EXPIRATION=15
+IMS_LOG_LEVEL=Information
+
+3. Docker Compose Configuration
+-----------------------------
+
+version: '3.8'
+services:
+  ims-gateway:
+    image: imsgateway:latest
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - IMS_API_URL=https://api.ims.example.com
+      - IMS_MAX_POOL_SIZE=100
+      - IMS_CONNECTION_TIMEOUT=30
+    ports:
+      - "8080:80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+4. Kubernetes Configuration
+-------------------------
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ims-config
+data:
+  IMS_API_URL: "https://api.ims.example.com"
+  IMS_MAX_POOL_SIZE: "100"
+  IMS_CONNECTION_TIMEOUT: "30"
+  IMS_RETRY_COUNT: "3"
+  IMS_HEALTH_CHECK_INTERVAL: "300"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ims-gateway
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+      - name: ims-gateway
+        image: imsgateway:latest
+        envFrom:
+        - configMapRef:
+            name: ims-config
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 30
+
+5. Logging Configuration
+----------------------
+
+Development (serilog.json):
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Debug",
+      "Override": {
+        "Microsoft": "Information",
+        "System": "Information"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}"
+        }
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "logs/ims-dev-.log",
+          "rollingInterval": "Day"
+        }
+      }
+    ]
+  }
+}
+
+Production (serilog.json):
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": {
+          "outputTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}"
+        }
+      },
+      {
+        "Name": "Elasticsearch",
+        "Args": {
+          "nodeUris": "http://elasticsearch:9200",
+          "indexFormat": "ims-logs-{0:yyyy.MM}",
+          "autoRegisterTemplate": true
+        }
+      }
+    ],
+    "Enrich": ["WithMachineName", "WithThreadId", "WithEnvironmentName"]
+  }
+}
+
+6. Metrics Configuration
+----------------------
+
+prometheus.yml:
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'ims-gateway'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['localhost:8080']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        regex: '([^:]+)(:[0-9]+)?'
+        replacement: '${1}'
+
+7. Health Check Configuration
+---------------------------
+
+healthchecks.json:
+{
+  "HealthChecks": {
+    "Memory": {
+      "Enabled": true,
+      "Threshold": 85
+    },
+    "Database": {
+      "Enabled": true,
+      "Timeout": "00:00:30"
+    },
+    "IMS": {
+      "Enabled": true,
+      "Interval": "00:05:00",
+      "Timeout": "00:00:30",
+      "FailureThreshold": 3,
+      "SuccessThreshold": 1
+    }
+  },
+  "HealthCheckUI": {
+    "Enabled": true,
+    "Path": "/health-ui",
+    "UpdateInterval": 30
+  }
+} 

@@ -1,4 +1,4 @@
-IMS Web Services
+IMS Web Services.
 Introduction
 
 There is a small subset of IMS functionality that we expose through webservices that allows for external and vendor integrations. This allows for integrations to perform various functions such as managing insureds and producers, creating new submissions and quotes, generating documents, as well as implementing custom functionality through a simplified data access service. These base webservices should provide all the needed tools for implementing external integrations with the IMS product, and they continue to evolve as specific functions are deemed necessary for clients. We also provide custom webservices, which integrate entirely with the base IMS webservices, extending functions not currently possible through the base web service, and created on an as needed basis.

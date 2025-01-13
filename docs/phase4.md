@@ -1,9 +1,9 @@
 ## Management Portals
 
 ### API Gateway Portal
-- API key management
-- Usage monitoring
-- Documentation access
+- ✓ API key management
+- ✓ Usage monitoring
+- ✓ Documentation access
 - Account management
 - Billing dashboard
 
@@ -11,5 +11,5 @@
 - Workflow designer
 - Connection management
 - Template library
-- Monitoring dashboard
-- Usage tracking 
+- ✓ Monitoring dashboard
+- ✓ Usage tracking 

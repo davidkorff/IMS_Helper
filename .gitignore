@@ -1,0 +1,111 @@
+# Cursor rules
+.cursorrules
+
+# Secrets and credentials
+*.pfx
+*.key
+*.pem
+**/appsettings.*.json
+**/secrets.json
+**/credentials.json
+.env
+.env.*
+
+# Database files
+*.mdf
+*.ldf
+*.db
+*.sqlite
+test.db*
+
+# IDE and editor files
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Dependencies
+node_modules/
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Logs and temporary files
+[Ll]ogs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.tmp
+*.temp
+*.swp
+*~
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Documentation drafts and personal notes
+docs/drafts/
+**/marynotes.txt
+**/notes.txt
+TODO.md
+NOTES.md
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*.[Bb]ak
+*.orig
+
+# Integration test data
+**/TestData/
+**/SampleData/
+**/mock-data/
+
+# Local configuration
+*.Development.json
+*.Local.json
+launchSettings.json
+
+# Docker
+.docker/data/
+docker-compose.override.yml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars

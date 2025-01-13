@@ -1,4 +1,4 @@
-Here’s the typical instructions we provide to all clients to explain the full Quoting process through the webservices. Save a copy somewhere, create a template, move to a word doc. Does not matter, just keep it in case any other integrations are requested.
+Here is the typical instructions we provide to all clients to explain the full Quoting process through the webservices. Save a copy somewhere, create a template, move to a word doc. Does not matter, just keep it in case any other integrations are requested.
 
 
 https://webservices.mgasystems.com/ims_demo/logon.asmx (use LoginUser method passing the above)
