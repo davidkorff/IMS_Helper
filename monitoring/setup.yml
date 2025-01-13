@@ -1,0 +1,13 @@
+metrics:
+  - API response times
+  - Workflow execution times
+  - Error rates
+  - Resource usage
+  - User activity
+  - Billing events
+
+alerts:
+  - Service health
+  - Error thresholds
+  - Usage spikes
+  - Billing issues 

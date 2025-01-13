@@ -1,0 +1,35 @@
+<NewDataSet>
+  <Table>
+    <InsuredGuid>1204fa63-9450-48af-a1a6-7f1d1ddc7133</InsuredGuid>
+    <Score>4</Score>
+    <PolicyName>AllDigital Test 3, LLC</PolicyName>
+    <Address1>21 Main Street</Address1>
+    <City>Adamsville</City>
+    <State>AL</State>
+    <ZipCode>35005</ZipCode>
+    <StatusID>3</StatusID>
+    <ControlNo>3</ControlNo>
+  </Table>
+  <Table>
+    <InsuredGuid>d398e55b-c4b4-492b-832c-beb18544412d</InsuredGuid>
+    <Score>4</Score>
+    <PolicyName>AllDigital Test 2 LP</PolicyName>
+    <Address1>88 Oak Drive</Address1>
+    <City>Upper Saddle River</City>
+    <State>NJ</State>
+    <ZipCode>07458</ZipCode>
+    <StatusID>3</StatusID>
+    <ControlNo>2</ControlNo>
+  </Table>
+  <Table>
+    <InsuredGuid>cd17497f-3604-44b6-bd68-cdb0499502e7</InsuredGuid>
+    <Score>4</Score>
+    <PolicyName>AllDigital Test, Inc.</PolicyName>
+    <Address1>123 Main Street</Address1>
+    <City>New York</City>
+    <State>NY</State>
+    <ZipCode>10022</ZipCode>
+    <StatusID>3</StatusID>
+    <ControlNo>1</ControlNo>
+  </Table>
+</NewDataSet>

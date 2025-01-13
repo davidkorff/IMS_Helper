@@ -1,0 +1,24 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: .NET Format Check
+      run: dotnet format --verify-no-changes src/ApiGateway
+      
+    - name: Python Lint
+      run: |
+        poetry install
+        poetry run black --check src/integrations
+        poetry run flake8 src/integrations
+        poetry run mypy src/integrations 

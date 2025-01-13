@@ -1,0 +1,122 @@
+/* Theme Colors */
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #4285f4;
+    --text-color: #202124;
+    --background-color: #ffffff;
+    --border-color: #dadce0;
+    --header-bg: #f8f9fa;
+    --code-bg: #f1f3f4;
+}
+
+/* Header Styling */
+.swagger-ui .topbar {
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
+}
+
+.swagger-ui .topbar .download-url-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* Operation Blocks */
+.swagger-ui .opblock {
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    margin: 0 0 1rem;
+}
+
+.swagger-ui .opblock .opblock-summary {
+    padding: 1rem;
+}
+
+.swagger-ui .opblock .opblock-summary-method {
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* HTTP Methods */
+.swagger-ui .opblock.opblock-get {
+    border-color: var(--primary-color);
+}
+
+.swagger-ui .opblock.opblock-post {
+    border-color: #34a853;
+}
+
+.swagger-ui .opblock.opblock-put {
+    border-color: #fbbc05;
+}
+
+.swagger-ui .opblock.opblock-delete {
+    border-color: #ea4335;
+}
+
+/* Parameters and Responses */
+.swagger-ui .parameters-container, 
+.swagger-ui .responses-wrapper {
+    background-color: var(--background-color);
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.swagger-ui table.parameters td,
+.swagger-ui table.responses-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Code Samples */
+.swagger-ui .highlight-code {
+    background-color: var(--code-bg);
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+/* Models */
+.swagger-ui .model {
+    padding: 1rem;
+}
+
+.swagger-ui .model-box {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Buttons */
+.swagger-ui .btn {
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: none;
+    padding: 0.5rem 1rem;
+}
+
+.swagger-ui .try-out__btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Authentication */
+.swagger-ui .auth-wrapper {
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+
+/* Schema Tables */
+.swagger-ui .model-box table.model tr td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .swagger-ui .opblock-summary-description {
+        text-align: left;
+        padding-top: 0.5rem;
+    }
+} 

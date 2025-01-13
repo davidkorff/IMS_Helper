@@ -1,0 +1,18 @@
+components:
+  api_gateway:
+    - NET 6.0 Web API
+    - Azure API Management
+    - Redis Cache
+    - Application Insights
+    
+  ipaas:
+    - NET 6.0 Web App
+    - SignalR for real-time updates
+    - Workflow storage (CosmosDB)
+    - Template engine
+    
+  shared:
+    - Identity server
+    - Logging service
+    - Monitoring
+    - Usage tracking 

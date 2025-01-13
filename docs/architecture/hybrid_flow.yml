@@ -1,0 +1,20 @@
+flow:
+  1_client_request:
+    - External system calls Python FastAPI endpoint
+    
+  2_python_processing:
+    - Data validation with Pydantic
+    - Business logic in Python
+    - Integration-specific transformations
+    
+  3_ims_interaction:
+    - Python calls .NET API Gateway
+    - Gateway handles IMS SOAP communication
+    
+  4_workflow_management:
+    - Prefect/Airflow orchestrates complex flows
+    - Celery handles background tasks
+    
+  5_monitoring:
+    - Prometheus/Grafana for metrics
+    - ELK stack for logging 

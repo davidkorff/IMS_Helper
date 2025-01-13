@@ -1,0 +1,128 @@
+@page
+@model DeveloperPortal.Pages.IndexModel
+@{
+    ViewData["Title"] = "Developer Portal";
+}
+
+<div class="dev-portal">
+    <header class="portal-header">
+        <div class="container">
+            <h1>@Model.Options.Title</h1>
+            <p class="lead">@Model.Options.Description</p>
+            
+            <div class="portal-search">
+                <input type="text" 
+                       placeholder="Search documentation..." 
+                       id="searchDocs"
+                       class="search-input" />
+            </div>
+        </div>
+    </header>
+
+    <main class="portal-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <section class="getting-started">
+                        <h2>Getting Started</h2>
+                        <div class="card-grid">
+                            @foreach (var guide in Model.GettingStartedGuides)
+                            {
+                                <div class="guide-card">
+                                    <h3>@guide.Title</h3>
+                                    <p>@guide.Description</p>
+                                    <a href="/docs/guides/@guide.Id" 
+                                       class="btn btn-primary">
+                                        Learn More
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </section>
+
+                    <section class="api-reference">
+                        <h2>API Reference</h2>
+                        <div class="api-versions">
+                            @foreach (var version in Model.Options.ApiVersions)
+                            {
+                                <div class="version-card">
+                                    <h3>@version</h3>
+                                    <ul class="api-links">
+                                        <li>
+                                            <a href="/docs/api/@version/reference">
+                                                Reference
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/docs/api/@version/examples">
+                                                Examples
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/docs/api/@version/changelog">
+                                                Changelog
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                        </div>
+                    </section>
+                </div>
+
+                <div class="col-md-4">
+                    <aside class="portal-sidebar">
+                        <section class="quick-links">
+                            <h3>Quick Links</h3>
+                            <ul>
+                                <li>
+                                    <a href="/docs/guides/authentication">
+                                        Authentication
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/docs/guides/rate-limiting">
+                                        Rate Limiting
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/docs/guides/error-handling">
+                                        Error Handling
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="resources">
+                            <h3>Resources</h3>
+                            <ul>
+                                @foreach (var doc in Model.Options.ExternalDocs)
+                                {
+                                    <li>
+                                        <a href="@doc.Value" target="_blank">
+                                            @doc.Key
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </section>
+
+                        <section class="support">
+                            <h3>Support</h3>
+                            <p>
+                                Need help? Contact us at 
+                                <a href="mailto:@Model.Options.ContactEmail">
+                                    @Model.Options.ContactEmail
+                                </a>
+                            </p>
+                        </section>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+@section Scripts {
+    <script src="~/docs/content/js/portal.js"></script>
+} 

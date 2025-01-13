@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <TokenHeader xmlns="http://tempuri.org/IMSWebServices/DataAccess">
+      <Token>...</Token> <!-- Redacted for sample. -->
+      <Context/>
+    </TokenHeader>
+  </soap:Header>
+  <soap:Body>
+    <ExecuteDataSet xmlns="http://tempuri.org/IMSWebServices/DataAccess">
+      <procedureName>ValidCompanyLinesXml</procedureName>
+      <parameters>
+        <string>@programCode</string>
+        <string>TFLOD</string>
+      </parameters>
+    </ExecuteDataSet>
+  </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,17 @@
+environments:
+  development:
+    - Azure App Service
+    - Azure API Management
+    - Azure Redis Cache
+    - Azure CosmosDB
+    
+  staging:
+    - Replicate of production
+    - Test data
+    - Monitoring
+    
+  production:
+    - Geo-redundant services
+    - Enhanced monitoring
+    - Backup systems
+    - DR plan 

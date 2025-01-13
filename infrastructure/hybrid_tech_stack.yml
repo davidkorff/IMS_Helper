@@ -1,0 +1,27 @@
+core_platform:
+  api_gateway: 
+    - .NET 6/7 (handles IMS SOAP interactions)
+    
+  integration_services:
+    primary:
+      - Python 3.11+
+      - FastAPI (for integration microservices)
+      - Pydantic (data validation)
+    workflow:
+      - Prefect/Airflow (Python-based workflow engine)
+    
+  middleware_engine:
+    messaging:
+      - RabbitMQ
+    background_jobs:
+      - Celery (Python)
+      - Redis (broker)
+    
+  data_layer:
+    primary: PostgreSQL
+    caching: Redis
+    document_store: MongoDB
+    
+  interop:
+    - gRPC (for .NET-Python communication)
+    - REST APIs between services 
